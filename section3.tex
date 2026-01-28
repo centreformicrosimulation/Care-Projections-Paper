@@ -1,0 +1,103 @@
+\section{Modelling Care}
+\label{sec3}
+
+The statistical analysis reported in Section \ref{sec2} informed the methods used to generate projections for care that are the focus of the current analysis. These methods were implemented in SimPaths, an open-source dynamic microsimulation model parameterised to UK data.\footnote{SimPaths models currently exist for the UK, Greece, Hungary, Italy, and Poland.} The model assumed for this study is freely available for download from \noteDS{GitHub.}[Add link] A walk-through to facilitate replication of reported results is also provided in \noteDS{Appendix E.}[Update] \par
+A brief overview of the SimPaths model is presented in the Section \ref{sec3.1}. We refer to \textcite{bronka:2025}, as well as its GitHub Wiki page,\footnote{\url{https://github.com/centreformicrosimulation/SimPaths/wiki}.} for its detailed description. SimPaths' module to model receipt and provision of social care, which is the main focus of this study, is elaborated in Section \ref{sec3.2} and, more thoroughly, in Appendix \ref{appendix:a}. 
+
+\subsection{Overview of SimPaths}
+\label{sec3.1}
+SimPaths is a fully open-source structural dynamic microsimulation model of the life-course, coded in Java using the JAS-mine simulation libraries (\textcite{richiardi:2017}). The UK version runs on a database built upon two main data sources: the UK Household Longitudinal Study (UKHLS) and the Family Resources Survey (FRS). Individuals in the model are organised in benefit units (for fiscal purposes), and benefit units are organised in households. The model projects data for all simulated individuals at yearly intervals, which reflects the yearly frequency of the survey data used to parameterise the model. \par
+The current analysis is based on a variant of SimPaths that is composed of ten modules: (i) Ageing; (ii) Education; (iii) Health; (iv) Family composition; (v) Social care; (vi) Investment income; (vii) Labour income; (viii) Disposable income; (ix) Consumption, and (x) Statistical display. Each module is composed of one or more processes.\footnote{For example, the aging module contains ageing, mortality, child maturation, and population alignment processes.} The empirical specifications assumed for dynamic processes include extensive cross-module interaction of simulated characteristics (state variables). \par 
+The simulated modules and processes are organised in SimPaths as displayed in Figure \ref{fig:3.1}.
+% In each simulated year, agents are first subject to an ageing process, followed by population alignment. The alignment process adjusts the simulated population to match official population projections distinguished by gender, age, and geographic region, which ensures that simulated output remains representative of UK population projections. 
+% The education module simulates transitions into and out of student status. Students are assumed not to work and therefore do not enter the labour supply module. Individuals who leave education have their level of education re-evaluated and can become employed. 
+% The health module projects an individual’s health status, comprising a self-rated general health metric based on a five-point scale (poor, fair, good, very good, excellent), and an identifier to distinguish people affected by long-term sickness or disability. People who are long-term sick or disabled cannot work and may require social care. 
+% The family composition module is the principal source of interactions between simulated agents in the model. The module projects the formation and dissolution of cohabiting relationships and fertility. Where a relationship forms, then spouses are selected from within the simulated population via a matching process that is designed to reflect correlations between partners’ characteristics observed in survey data.
+% Females in couples can give birth to a (single) child in each simulated year, as determined by a process that depends on a range of characteristics including age and presence of children of different ages in the household. The existence of dependent children is associated with childcare responsibilities that are simulated as described in Section 3.2. 
+% The social care module projects provision and receipt of social care activities. Social care in the model refers to assistance provided to people who are in need of help due to poor health or advanced age. The module is designed to distinguish between formal and informal social care, and the social relationships associated with informal care. The social care module accounts for the time cost incurred by care providers with respect to informal care, and the financial cost incurred by care receivers with respect to formal care and is described in Section 3.3. 
+% The investment income module projects income based on accrued asset values and exogenously projected rates of return. 
+% The labour income module begins by projecting potential (hourly) wage rates for each simulated adult. Employment status is then projected, given the potential wage rates, as described in Section 3.4. Finally, (gross) labour income is determined by multiplying hours worked by the respective wage rate.
+% The disposable income model evaluates the income available to each benefit unit for financing consumption. This module imputes disposable income using a matching procedure to a reference database derived from the tax-benefit model UKMOD, as described in van de Ven et al. (2022).
+% Given disposable income and household demographics, the consumption module projects measures of benefit unit expenditure, as described in Section 3.4. Wealth is then projected through time as a simple accounting identity.
+At the end of each simulated year, SimPaths generates a series of year specific summary statistics. All of these statistics are saved for post-simulation analysis, with a subset of results also reported graphically as the simulation proceeds. \par
+
+\vspace{20pt}
+
+\begin{figure}[H]
+	\centering
+	\caption{\label{fig:3.1} Module configuration of the SimPaths microsimulation model}
+	\label{fig:simpaths}
+	\includegraphics[scale=0.9]{SimPaths}
+\end{figure}
+
+\subsection{Simulating Social Care}
+\label{sec3.2}
+Receipt of social care is simulated differently for individuals aged under and over 65, with a more detailed process adopted for older people, reflecting the more extensive data available for parameterisation. All empirical specifications considered for projecting receipt of social care are reported in Appendices \ref{appendix:a1} (individuals below 65) and \ref{appendix:a2} (individuals above 65). \par
+The current analysis focusses exclusively on home-based social care, ignoring transitions into residential care. Residential care was not considered due to the limited data available for empirical analysis.\footnote{Transitions into formal care were included as a question in the forerunner to the UKHLS (British Household Panel Survey), but they were discontinued due to very low response numbers.} In 2022, the ONS UK Health Accounts indicate that the value of health care expenditure on providers of home healthcare services was \pounds14.2 billion (2022 prices, 0.57\% of GDP), relative to \pounds 34.1 billion (1.36\% of GDP) on providers of residential long-term care facilities.\footnote{ONS Reference tables accompanying the 2022 UK Health Accounts and 2023 provisional estimates, \noteDS{Table 4a.} [Source?]} Similarly, the model is adapted to project provision of social care by informal sector providers (Appendix \ref{appendix:a3}); the characteristics of formal sector providers of social care are beyond the scope of this study. \par
+Public transfers to support social care spending are not reflected by UKMOD\footnote{UKMOD is the underlying static microsimulation model for the tax-benefit system in the UK incorporated in SimPaths.} and cannot therefore be accommodated using the imputation method based on data derived from that model. SimPaths was consequently extended to reflect public subsidies for social care costs using a functional add-on to transfer payments imputed using database methods. Specifically, total transfer payments are projected by first imputing transfer payments based on UKMOD data and then projecting social care payments for relevant benefit units using a tailored function. This is facilitated by the fact that social care related public transfers are exogenous to the wider public transfers system in the UK.
+
+\subsection{Simulating forward-looking behaviour}
+\label{sec3.3}
+The current study explores the influence of social care through the life-course, distinguishing among three types of effects: anticipation effects, when individuals foresee potential future periods of social care; impact effects, when social care is provided or received; and scarring effects, after periods of social care have passed. \par
+Analysis focuses on the two main margins of economic decision making: labour/leisure and consumption/savings choices. Our interest in anticipation effects of social care motivates the adoption of a forward-looking framework to simulate decisions. \par
+Labour supply and discretionary consumption decisions are simulated as though they are made to maximise expected lifetime utility subject to forward-looking (rational) expectations. The unit of analysis is the benefit unit, and incentives are translated into behaviour via an assumed intertemporal utility function. A nested constant elasticity of substitution (CES) utility function was adopted for analysis, as described by Equation (\ref{eq2}). \par
+\begin{equation}
+	U_{i,t}
+	=
+	\frac{1}{1-\gamma}
+	\left\{
+	\hat{u}( \hat{c}_{i,t}, l_{i,t} )^{\,1-\gamma}
+	+
+	{E}_{i,t}
+	\left[
+	\sum_{j=t+1}^{\infty}
+	\delta^{\,j-t}
+	\left(
+	\phi_{i,j}\,
+	\hat{u}( \hat{c}_{i,j}, l_{i,j} )^{\,1-\gamma}
+	+
+	(1-\phi_{i,j})\,
+	Z(w_{i,j})^{\,1-\gamma}
+	\right)
+	\right]
+	\right\}
+	\label{eq2}
+	\tag{2}
+\end{equation}
+
+\begin{equation}
+	u(\hat{c}_{i,t}, l_{i,t})
+	=
+	\left[
+	\hat{c}_{i,t}^{\,1-\frac{1}{\varepsilon}}
+	+
+	\alpha^{\frac{1}{\varepsilon}}
+	\, l_{i,t}^{\,1-\frac{1}{\varepsilon}}
+	\right]^{\frac{1}{\,1-\frac{1}{\varepsilon}}}
+	\tag{3}
+\end{equation}
+
+\begin{equation}
+	Z(w_{i,j})
+	=
+	\zeta_0
+	\left( w_{i,j}^{+} \right)^{\zeta_1}
+	\tag{4}
+\end{equation}
+
+where subscripts $i$ denote benefit units and $t$ time. $u(\hat{c}_{i,t}, l_{i,t})$ represents within period utility derived from equivalised discretionary consumption $\hat{c}$ and time spent in leisure ($l$). $Z(w)$ represents the warm-glow model of bequests, derived from non-negative net wealth at death $w^+$. $E$ is the expectations operator and $\phi$ the probability of survival of the benefit unit reference person, which varies by gender, age and year. $\gamma$ is the coefficient of relative risk aversion, $\epsilon$ the elasticity of substitution between equivalised consumption and leisure, $\alpha$ the utility price of leisure, and $\delta$ the constant exponential discount factor. \par
+Each adult is considered to have three labour supply alternatives, corresponding to full-time, part-time and non-employment. Labour supply and discretionary consumption are projected as though they maximise the assumed utility function, subject to a hard constraint on net wealth and assumed agent expectations. Expectations are ``substantively rational'' in the sense that uncertainty is characterised by the random draws that underly dynamic projection of modelled characteristics. 
+No analytical solution exists to the decision problem described above. Furthermore, application of the decision problem in a way that captures real-world circumstances invalidate adoption of computational short-cuts.  Numerical solution methods were consequently adopted, following standard practice in the dynamic programming literature (see e.g., \textcite{vandeven:2017}). \par
+The model proceeds in two discrete steps. The first step involves solution of the lifetime decision problem for any potential combination of agent specific characteristics, with solutions stored in a look-up table. The second step uses the look-up table as the basis for projecting labour supply and discretionary consumption. Technical details of the numerical solution method are provided in \noteDS{Appendix D.}[Update]
+
+\subsubsection{Specification of preference parameters}
+\label{sec3.3.1}
+The utility function parameters described above were adjusted to match model projections for 2019 to selected statistics estimated from UKHLS survey data. Use of UKHLS data to parameterise preferences is consistent with the data used to estimate most of the other model parameters, as discussed in \textcite{bronka:2025}. Use of data for a single population cross-section to parameterise the preference parameters of the model follows \textcite{vandeven:2017}. Data for 2019 were considered, as this is the first year from which projections are made, so that most agent characteristics (model state variables) are based on survey data from this year. \par  
+The value of $\gamma$ (the coefficient of relative risk aversion) was exogenously set to 2.0, based on meta-analyses reported by \textcite{elminejad:2022} and \textcite{havranek:2013}. \textcite{elminejad:2022} explore 1,021 estimates for relative risk aversion from 92 studies. They report that mean risk aversion is equal to 1 in economics and between 2 and 7 in finance contexts. In a similar vein, \textcite{havranek:2013} analyse 34 studies that report 242 estimates for the intertemporal elasticity of substitution calculated on UK data. The mean of these estimates is 0.487 and the standard deviation is 1.09. In our case, adoption of CES intertemporal preferences implies that the intertemporal elasticity of substitution is (approximately) equal to the inverse of relative risk aversion, suggesting a value for $\gamma$ in the region of 2.0. \par
+Given the assumed value for $\gamma$, $\alpha$ (utility price of leisure) was adjusted to match the model to the proportion of people aged 18 to 74 who were reported by the UKHLS to be not employed in 2019. \par
+Following \textcite{vandeven:2017}, $\epsilon$ (elasticity of substitution between equivalised consumption and leisure) was adjusted to match the model to distributional variation observed for the ratio between equivalised consumption and leisure. Specifically, the preference relation described by Equation \ref{eq2} implies that, as $\epsilon$ increases, so too does the ratio of equivalised consumption to leisure of high incomehigh-income people (graduates) relative to lower income people (non-graduates). \par
+$\delta$ (constant exponential discount factor) and $\zeta_0$ (warm glow model for bequests) were adjusted to reflect the ratio of average equivalised expenditure by benefit units with heads aged 55 to 74, relative to benefit units with heads aged 18 to 54.\footnote{As the UKHLS does not report comprehensive measures of household expenditure, these statistics were evaluated using data reported by the Living Costs and Food (LCF) survey from 2019. Use of the ratio of consumption, rather than consumption in levels was done to accommodate any fundamental differences in financial flows described by the LCF and UKHLS.} \par
+The above parameters were manually adjusted until the disparity between statistics evaluated from simulated and survey data for each of the moments noted above were reduced to less than one percentage point. Specifically, the following parameters were identified for analysis: \newline
+$\gamma$ = 2.0;	$\alpha$ = 1.26; $\epsilon$ = 0.34; $\delta$ = 0.98; $\zeta_0$ = 17;  $\zeta_1$ = 0.4. \par
+With these preference parameters, the model projects: 37.45\% people aged 18 to 74 not in employment, compared with 38.08\% described by survey data; the ratio of equivalised consumption to leisure of graduates 1.3541 times that of non-graduates, compared with 1.3614 described by survey data ; average equivalised consumption among people aged 18 to 54 equal to 0.7972 times that of people aged 55 to 74, compared with 0.7896 described by survey data. \par
+Further analysis revealed that the assumed preference parameters implied a population average intertemporal elasticity of substitution of consumption equal to 0.3501, which lies well within the range of estimates reported by \textcite{havranek:2013}. This is consistent with the motivation underlying the assumed value for $\gamma$. Similarly, the population average (Marshallian) labour supply elasticity implied by the parameterised model was evaluated at 0.1789. This property of the model is also in common with estimates reported in the associated empirical literature, which are typically between -0.12 and +0.28.\footnote{Based on estimates reported in the review by \textcite{keane2011} and the meta-analysis of \textcite{bargain:2016}; see \noteDS{Appendix A.6.}[Update]}

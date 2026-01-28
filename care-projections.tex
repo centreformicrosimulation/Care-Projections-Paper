@@ -1,0 +1,111 @@
+\documentclass[12pt]{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' 
+\usepackage[english]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+% \usepackage{natbib}
+\hyphenpenalty=5000 % Make LaTeX more willing to hyphenate
+\exhyphenpenalty=5000 % Make LaTeX more willing to break at existing hyphens
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amsmath}
+\usepackage{pdflscape}
+\usepackage{rotating}
+\usepackage{adjustbox}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage[bottom]{footmisc}
+\usepackage{array}
+\usepackage{threeparttable}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[normalem]{ulem}
+%\usepackage[lofdepth,lotdepth]{subfig}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{cleveref}
+\usepackage{soulutf8}
+\usepackage{pdflscape} % Required for landscape orientation
+\usepackage{longtable} % Required for multi-page tables
+\usepackage{array}     % For custom column widths
+\usepackage{booktabs}  % For \midrule and \hline improvements
+\usepackage{setspace}  % For \begin{singlespace}
+\soulregister{\textbf}{1} % Allow bold inside highlights if needed
+\usepackage[normalem]{ulem} % for \sout
+\usepackage{footnotebackref}
+\usepackage{ragged2e}
+\usepackage{rotating}
+
+\captionsetup{font=normalsize, labelfont=bf, textfont=normalfont}
+% \bibpunct[:]{[}{]}{,}{a}{}{,}
+
+% Track change commands
+\newcommand{\rev}[1]{{\color{blue}#1}}
+\newcommand{\add}[1]{{\color{ForestGreen}#1}}
+\newcommand{\del}[1]{{\color{red}\sout{#1}}}
+\newcommand{\noteMR}[1]{\sethlcolor{yellow}\hl{\textbf{MR}: #1}}
+\newcommand{\noteDS}[1]{\sethlcolor{yellow}\hl{\textbf{DS}: #1}}
+
+% Referencing
+\usepackage[backend=biber, style=apa]{biblatex}
+\addbibresource{references.bib}
+\nocite{*}
+\DeclareNameAlias{sortname}{family-given}
+\setlength\bibitemsep{1em}
+\usepackage[toc,page]{appendix}
+
+
+\title{Demand and Supply of Care Over the Life Course\thanks{We would like to thank bla bla bla (line on funds and/or acknowledgment for valuable comments).}}
+\author{
+	Matteo Richiardi\thanks{University of Essex - Centre for Microsimulation and Policy Analysis, email: \href{mailto:matteo.richiardi@essex.ac.uk}{\texttt{matteo.richiardi@essex.ac.uk}.}} \and
+	David Sonnewald\thanks{University of Essex - Centre for Microsimulation and Policy Analysis, email: \href{mailto:david.sonnewald@essex.ac.uk}{\texttt{david.sonnewald@essex.ac.uk}.}} \and
+	Justin Van De Ven\thanks{University of Essex - Centre for Microsimulation and Policy Analysis, email: \href{mailto:j.vandeven@essex.ac.uk}{\texttt{j.vandeven@essex.ac.uk}.}}
+}
+
+\begin{document}
+	\onehalfspacing
+	\maketitle	
+	\begin{abstract}
+		We project the effects of changes in fertility and mortality rates on both the receipt and provision of care in the UK. We investigate the impact on the level and cost of care, as well as its share of total GDP, through the life course and across income and wealth distributions. SimPaths, an open-source dynamic microsimulation model, is employed to design different scenarios over a half-century period. This framework projects life histories over time, developing detailed representations of career paths, family and intergenerational relationships, health, and financial circumstances. Our estimates show that the value of care, as a share of GDP, almost doubles over the five 
+		\bigskip
+	\begin{list}{}{\setlength{\parsep}{0pt}\setlength{\itemsep}{0pt}\setlength{\leftmargin}{0pt}}
+		\item \textbf{Keywords:} Care, Dynamic Microsimulation, Population Ageing.
+		\item \textbf{JEL Classification:} C63, D15, J11.
+	\end{list}
+	\end{abstract}
+	
+	\pagebreak
+
+	\input{section1}
+	
+	\input{section2}
+	
+	\input{section3}
+	
+	\input{section4}
+	
+	\input{section5}
+	
+	\pagebreak
+	
+	% References list
+	\addcontentsline{toc}{section}{References}
+	\renewcommand\bibname{References}
+	\printbibliography
+	
+	\pagebreak
+	
+	\input{appendix}
+	
+\end{document}

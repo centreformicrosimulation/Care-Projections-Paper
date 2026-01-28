@@ -1,0 +1,437 @@
+% --------------------------------------------------
+% Appendices
+% --------------------------------------------------
+\appendix
+
+\begin{appendices}
+\end{appendices}
+\setcounter{figure}{0}
+\renewcommand\thefigure{\thesection.\arabic{figure}}
+\setcounter{table}{0}
+\renewcommand\thetable{\thesection.\arabic{table}}
+\renewcommand{\thesubsection}{\Alph{section}.\arabic{subsection}}
+
+\section{Social Care Processes}
+\label{appendix:a}
+
+\subsection{Need and Receipt of Social Care for Population Aged Under 65}
+\label{appendix:a1}
+All individuals under age 65 who are identified as long-term sick and disabled are assumed to have a need for social care. Furthermore, any individual in need of social care is assumed to be unable to work, so that long-term sick and disabled are omitted from employment. These assumptions reflect the adoption of an employment status identifier (FRS variable \texttt{empstati}) for the empirical specification of disability, and the high incidence of social care receipt reported among people with a disability as discussed in \noteDS{Section 2.2.1.}[Update] Note that use of an employment status identifier also omits the incidence of social care to children from the analysis.\footnote{Children’s social care includes support for children with disabilities, requiring protection from harm, or being looked after by local authorities.}  Hence, the ``social care'' considered for analysis is shorthand for ``adult social care'', in common with popular discussion. \par
+Receipt of social care among individuals under age 65 focusses exclusively on informal social care. At the time an individual under age 65 is projected to enter a disabled state, a probit equation (Table \ref{tab:a1}) is used to identify whether the individual receives informal social care. In the absence of longitudinal data to parameterise persistence, this projection is assumed to continue for as long as the person remains ill or disabled. If an individual under age 65 is identified as receiving social care, then care is assumed to be provided by a single person, with the time of care described by a linear equation (Table \ref{tab:a2}). The (informal) carer is identified deterministically, using a hierarchical approach falling first to a spouse under age 75 (if one exists), then to parents under age 75, and finally to ``other'' adults aged between 25 and 74 years.
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a1} Probit regression estimates for receipt of informal social care services among people aged 16 to 64 with a long-term illness or disability.}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{Coefficient} & \textbf{Standard Error} & \textbf{p>z}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported by FRS at annual intervals between 2015/16 and 2019/20, and 2021/22.
+		\item \textit{Notes}. Sample limited to individuals between age 16 and 64 with a long-term illness or disability. Robust standard errors reported. Long term illness or disability identified as code 9 of variable \texttt{empstati}.
+	\end{tablenotes}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a2} Linear least squares regression estimates for hours of informal care per week received by people aged 16 to 64 years, with a long-term illness or disability, and in receipt of some informal social care}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{Coefficient} & \textbf{Standard Error} & \textbf{p>z}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported by FRS at annual intervals between 2015/16 and 2019/20, and 2021/22.
+		\item \textit{Notes}. Sample limited to individuals between age 16 and 64 with a long-term illness or disability. Robust standard errors reported. Long term illness or disability identified as code 9 of variable \texttt{empstati}.
+	\end{tablenotes}
+\end{table}
+
+\subsection{Need and Receipt of Social Care for Population Aged 65 and over}
+\label{appendix:a2}
+Social care provisions for individuals aged 65 and over are projected using the following process. First, the incidence of needing care is modelled following probabilities described by a probit equation (Table \ref{tab:a3}). Second, the incidence of receipt of care is also modelled as a probit equation (Table \ref{tab:a4}). If in receipt of care, a multinomial logit equation (Table \ref{tab:a5}) is used to determine if the individual receives: i) only informal care; ii) formal and informal care; or iii) only formal care. If in receipt of informal care, a multi-level model is used to distinguish between alternative providers of informal care. The first level (Table \ref{tab:a6}) considers whether a partner provides informal care, for individuals with partners and in receipt of some informal care. For individuals who receive social care from their partner, the second level uses a multinomial logit (Table \ref{tab:a7}) to consider whether they also receive care from a daughter, a son, or someone else (other). For individuals in receipt of informal care who do not have a partner caring for them, another multinomial logit (Table \ref{tab:a8}) considers six alternatives that allow for up to two carers from ``daughter'', ``son'', and ``other''. For each carer, a log linear equation (Tables \ref{tab:a9} to \ref{tab:a13}) is used to project number of hours of care provided. Finally, hours of formal care are converted into a cost, based on the year-specific mean hourly wages for all social care workers, \noteDS{as reported in Table 2.5.}[Update]\footnote{Where the simulated year lies outside the time-series reported in the table, the series is extended assuming a (geometric) growth rate of 3.1\% per annum. This growth rate is the average reported between 2011 and 2022 in Table 3.5, and is greater than the rate assumed for inflation of 2.6\% per annum.} 
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a3} Probit regression estimates for “in need of care” for people aged 65+}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{Coefficient} & \textbf{Standard Error} & \textbf{p>z}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported by waves ``g'', ``i'', and ``k'' of UKHLS.
+		\item \textit{Notes}. Sample limited to individuals aged 65 and over without missing variables. Weighted estimates with robust standard errors. ``Need care'' defined as requiring assistance with at least two activities of daily living reported by the UKHLS (including instrumental activities). ``lag'' defined as preceding year.
+	\end{tablenotes}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a4} Probit regression estimates for receipt of social care for people aged 65+}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{Coefficient} & \textbf{Standard Error} & \textbf{p>z}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported by waves ``g'', ``i'', and ``k'' of UKHLS.
+		\item \textit{Notes}. Sample limited to individuals aged 65 and over without missing variables. Weighted regression with robust standard errors reported. ``Receive care'' defined as reported receipt of help with at least one of the activities of daily living reported by the UKHLS in the week preceding the survey. ``lag'' refers to preceding year.
+	\end{tablenotes}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a5} Multinomial logit regression estimates for formal and informal social care of population aged 65 and over in receipt of some care (reference group: only informal care)}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{Coefficient} & \textbf{Standard Error} & \textbf{p>z}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported by waves ``g'', ``i'', and ``k'' of UKHLS.
+		\item \textit{Notes}. Sample limited to individuals aged 65 and over receiving social care without missing variables. Weighted regression with robust standard errors reported. ``lag'' refers to preceding year.
+	\end{tablenotes}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a6} Probit regression estimates describing incidence of partners providing social care for people aged 65 and over receiving care and with a partner}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{Coefficient} & \textbf{Standard Error} & \textbf{p>z}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported by waves ``g'', ``i'', and ``k'' of UKHLS.
+		\item \textit{Notes}. Sample limited to individuals aged 65 and over receiving social care, with a partner, and without missing variables. Weighted estimates with robust standard errors reported. Explanatory variables describe characteristics of person in receipt of care. ``lag'' is defined as preceding year.
+	\end{tablenotes}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a7} Multinomial logit regression estimates for receipt of supplementary care for population aged 65 and over who receive care from their partner (reference group: none)}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{Coefficient} & \textbf{Standard Error} & \textbf{p>z}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported by waves ``g'', ``i'', and ``k'' of UKHLS.
+		\item \textit{Notes}. Sample limited to individuals aged 65 and over receiving social care from their partner and without missing variables. Regression considers four alternatives for supplementary carers: none (reference), daughter, son, and other. Weighted regression with robust standard errors reported. ``lag'' defined as preceding year.
+	\end{tablenotes}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a8} Multinomial logit regression estimates for informal carer(s) for population aged 65 and over who receive care but not from a partner (reference group: daughter only)}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{Coefficient} & \textbf{Standard Error} & \textbf{p>z}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported by waves ``g'', ``i'', and ``k'' of UKHLS.
+		\item \textit{Notes}. Sample limited to individuals aged 65 and receiving social care but not from a partner and without missing variables. Regression considers six possible alternatives: none daughter only (reference), daughter and son, daughter and other, son only, son and other, and other only. Weighted estimates with robust standard errors reported. ``lag'' refers to preceding year.
+	\end{tablenotes}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a9} Linear least squares regression estimates for log hours of informal care per week provided by partner to people aged 65 and over}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{Coefficient} & \textbf{Standard Error} & \textbf{p>z}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported by waves ``g'', ``i'', and ``k'' of UKHLS.
+		\item \textit{Notes}. Sample limited to individuals aged 65 and receiving social care from a partner and without missing variables. Robust standard errors reported. Explanatory variables describe characteristics of person in receipt of care.
+	\end{tablenotes}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a10} Linear least squares regression estimates for log hours of informal care per week provided by daughter to people aged 65 and over}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{Coefficient} & \textbf{Standard Error} & \textbf{p>z}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported by waves ``g'', ``i'', and ``k'' of UKHLS.
+		\item \textit{Notes}. Sample limited to individuals aged 65 and receiving social care from a partner and without missing variables. Explanatory variables describe characteristics of person in receipt of care. Robust standard errors reported.
+	\end{tablenotes}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a11} Linear least squares regression estimates for log hours of informal care per week provided by son to people aged 65 and over}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{Coefficient} & \textbf{Standard Error} & \textbf{p>z}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported by waves ``g'', ``i'', and ``k'' of UKHLS.
+		\item \textit{Notes}. Sample limited to individuals aged 65 and receiving social care from a partner and without missing variables. Explanatory variables describe characteristics of person in receipt of care. Robust standard errors reported.
+	\end{tablenotes}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a12} Linear least squares regression estimates for log hours of informal care per week provided by others to people aged 65 and over}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{Coefficient} & \textbf{Standard Error} & \textbf{p>z}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported by waves ``g'', ``i'', and ``k'' of UKHLS.
+		\item \textit{Notes}. Sample limited to individuals aged 65 and receiving social care from a partner and without missing variables. Explanatory variables describe characteristics of person in receipt of care. Robust standard errors reported.
+	\end{tablenotes}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a13} Linear least squares regression estimates for log hours of formal care per week provided to people aged 65 and over}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{Coefficient} & \textbf{Standard Error} & \textbf{p>z}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported by waves ``g'', ``i'', and ``k'' of UKHLS.
+		\item \textit{Notes}. Sample limited to individuals aged 65 and receiving social care from a partner and without missing variables. Robust standard errors reported.
+	\end{tablenotes}
+\end{table}
+
+The probit equations describing need and receipt of social care for individuals aged 65 and over were estimated in a similar fashion, using pooled data reported by waves ``g'', ``i'', and ``k'' of the UKHLS. Individuals were identified as ``needing care'' if they reported requiring help with at least two of the activities of daily living (ADL) or instrumental activities of daily living (IADL) reported by the survey. The focus on ADLs to identify ``need of care'' is common in the associated literature (e.g., \textcite{albuquerque:2022}), and the focus on two ADLs reflects observations discussed in \noteDS{Section 2.2.1 (especially Table 2.2)}[Update] and associated terms set out by the Care Act 2014. Similarly, individuals were identified as ``receiving care'' if they reported receiving some assistance with at least one ADL or IADL in the week preceding the survey. \par
+The same set of explanatory variables are considered for the probit equations governing need and receipt of social care discussed above. These variables include gender, education status, relationship status, self-reported health status, age, and geographic region. Each regression also included a one-year lag of the dependent variable (imputed as discussed in Appendix A.5.1). This set of covariates corresponds to pre-determined variables for social care in the schedule used by SimPaths to project data for any given year. \par
+Coefficient estimates reported in Tables \ref{tab:a3} (need for care) and \ref{tab:a4} (receipt of care) share close similarities, alluding to the close correspondence between reported need for and receipt of social care. The incidence of social care tends to be lower for men than for women, after controlling for the remaining set of covariates. Caution should be exercised in interpreting this result, which may reflect under-reporting of gender biases in informal care among partner couples later in life. It is nevertheless consistent with estimates reported elsewhere in the literature (e.g., \textcite{albuquerque:2022}). \par
+Rates of social care tend to be inversely proportional to education level, which is also consistent with findings generally reported in the associated literature. Although self-reported health status is included in the set of covariates, this result may reflect a higher incidence of physically demanding work history among lower educated survey respondents. This interpretation is also consistent with the inverse relationship identified between rates of social care and self-reported health. \par
+Unsurprisingly, the estimated coefficients describe significant persistence for rates of social care, which rise appreciably with age. The estimates also indicate a positive relation between social care of having a partner, which reflect the predominant role of partners in provision of informal care as discussed in Section 2.2. While the coefficients that allow for regional variation are mixed, they tend to suggest higher rates of social care in London (the reference group), relative to the remainder of the UK. \par
+The simulation reported in Section \ref{sec4} uses a Monte Carlo approach to project need of care, based on probabilities described by the probit model reported in Table \ref{tab:a3} A similar approach is used to project receipt of care based on probabilities described by Table \ref{tab:a4}. Importantly, projections for need and receipt of care are based on the same random draw from a uniform [0,1] distribution. This implies that, where the probability of needing care (Table \ref{tab:a3}) exceeds the probability of receiving care (Table \ref{tab:a4}), then care will only be simulated where it is needed. Hence, in the current context unmet care needs reflect the degree to which probabilities describing needs for care exceed those of receiving care. \par
+Table \ref{tab:a5} reports multinomial regression coefficients for the split between informal and formal social care for the population aged 65 and over in receipt of some care.  The covariates included in this equation were selected after noting that coefficient estimates were insignificant for gender, self-reported health, and age under 85. The coefficient estimates reported in Table \ref{tab:a5} indicate that individuals receiving social care via the formal market tend to be higher educated, without a partner, or at an advanced age. \par
+Table \ref{tab:a6} indicates that, for individuals aged 65 and over, who receive some social care and have a partner, men are more likely than women to receive informal care from their partner. This is notable, as estimates reported in Tables \ref{tab:a3} and \ref{tab:a4} indicate that men are generally less likely to report receiving care. Table \ref{tab:a6} also highlights the persistence of care arrangements, and that care from partners is less prevalent toward the end of the life course. \par
+Tables \ref{tab:a7} and \ref{tab:a8} report multinomial logit regression estimates for the set of informal carers where an individual is identified as receiving some informal care.  In this case, covariates are limited to the lagged dependent variable (and a constant) to facilitate reflection of persistence in caring arrangements, subject to the limited data available for estimation. \par
+Tables \ref{tab:a9} to \ref{tab:a13} report linear regression estimates for hours of care received, distinguished by type of provider. Inspection of these tables indicates that the most precise estimates were evaluated for informal care hours provided by partners, for which the largest survey sample is available. The estimated statistics for care provided by partners indicate that hours of care tend to be higher for men, who are lower educated, in poor health, and who also have daughters that care for them. Other regression estimates reveal substantial uncertainty concerning coefficient estimates, with the positive relationship between hours of care and poor health being a notable exception. 
+
+\subsection{Simulating Provision of Social Care}
+\label{appendix:a3}
+The approach adopted for simulating receipt of social care described in Appendices \ref{appendix:a1} and \ref{appendix:a2} identifies the incidence and hours of informal social care that individuals are projected to receive. In the case of people aged 65 and over, it also identifies the relationship between those in receipt of informal social care and their informal care providers, and the persistence of those care relationships. These details consequently provide much of the information necessary to simulate provision of informal social care, in addition to the receipt of care. \par
+Nevertheless, the input data considered for SimPaths -- with the notable exception of partners -- omit social links that are implied to exist between informal social care providers and those receiving care. Specifically, links between adult children and their parents, and the wider social networks that often supply informal social care services are not recorded by the input data. The method that is used to project informal provision of social care is designed to accommodate limitations of the available survey data in a way that broadly reflects projection of social care receipt. \par
+Specifically, the model distinguishes between four population subgroups with respect to provision of informal social care: (i) no provision; (ii) provision only to a partner; (iii) provision to a partner and someone else; and (iv) provision but only to non-partners.  For people who are identified as supplying informal care to their partner via the process described in Section \ref{sec3.2}, a probit equation (Table \ref{tab:a14}) is used to distinguish between alternatives (ii) and (iii). Similarly, for the remainder of the population, another probit equation (Table \ref{tab:a15}) is used to distinguish between alternatives (i) and (iv). A log-linear equation (Table \ref{tab:a18}) is then used to project number of hours of care provided, given the classification of who care is provided to.
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a14} Probit regression estimates for the incidence of providing informal care to non-partners among people aged 18 and over who supply informal care to their partners}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{Coefficient} & \textbf{Standard Error} & \textbf{p>z}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported between 2015 and 2020 by waves ``f'' to ``l'' of the UKHLS.
+		\item \textit{Notes}. Sample limited to individuals aged 18 and over with partners to whom they provide informal care and without missing variables. Weighted estimates with robust standard errors. ``lag'' defined as preceding year. Regional dummy variables generally not significant, and omitted from table for brevity (available from authors upon request).
+	\end{tablenotes}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a15} Probit estimates for the incidence of providing informal care to non-partners among people aged 18 and over who do not supply informal care to a partner}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{Coefficient} & \textbf{Standard Error} & \textbf{p>z}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported between 2015 and 2020 by waves ``f'' to ``l'' of the UKHLS.
+		\item \textit{Notes}. Sample limited to individuals aged 18 and over who do not provide informal care to a partner and without missing variables. Weighted estimates with robust standard errors. ``lag'' defined as preceding year. Regional dummy variables generally not significant, and omitted from table for brevity (available from authors upon request).
+	\end{tablenotes}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a16} Probit regression estimates for the incidence of providing informal care among people aged 18 and over who do not have a partner}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{Coefficient} & \textbf{Standard Error} & \textbf{p>z}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported between 2015 and 2020 by waves ``f'' to ``l'' of the UKHLS.
+		\item \textit{Notes}. Sample limited to individuals aged 18 and over who do not have a partner and without missing variables.
+	\end{tablenotes}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a17} Multinomial logit regression estimates for the incidence of providing informal care among people aged 18 and over with a partner}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{only care for partner (4.9\%)} & \textbf{care for partner and other (1.3\%)} & \textbf{only care for other (13.0\%)}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported between 2015 and 2020 by waves ``f'' to ``l'' of the UKHLS.
+		\item \textit{Notes}. Notes: Sample limited to individuals aged 18 and over who have a partner and without missing variables comprising 112,579 observations. Pseudo R2 equals 0.3560. Reference group is people not providing social care. Population shares reported in brackets. Weighted estimates with robust standard errors. ``lag'' defined as preceding year. Regional dummy variables generally not significant, and omitted from table for brevity.
+	\end{tablenotes}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\captionsetup{font=small}
+	\caption{\label{tab:a18} Linear least squares regression estimates for log hours of informal care per week provided by people aged 18 and over}
+	\scalebox{0.7}{
+		\begin{tabular}{c c c c} 
+			\hline
+			\hline
+			& \textbf{Coefficient} & \textbf{Standard Error} & \textbf{p>z}
+			\\
+			\hline
+			\\
+			\hline
+		\end{tabular}
+	}
+	\begin{tablenotes}
+		\scriptsize
+		\item \textit{Source}. Authors' calculations on pooled data reported between 2015 and 2020 by waves ``f'' to ``l'' of the UKHLS.
+		\item \textit{Notes}. Sample limited to individuals aged 18 and over supplying some social care and without missing variables. See table A.17 for further details.
+	\end{tablenotes}
+\end{table}
